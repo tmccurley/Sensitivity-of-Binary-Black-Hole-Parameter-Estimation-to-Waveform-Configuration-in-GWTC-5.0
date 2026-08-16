@@ -1,0 +1,133 @@
+{
+  "analysis_timestamp_utc": "2026-08-02T17:08:30.917725+00:00",
+  "project_root": "/mnt/data/GWTC5_test",
+  "sample_lock_sha256": "2f6c3074654ecf6bf640a97e1b2b829617e5b99588786d35d5e9ff13ef702c3f",
+  "queue_sha256": "94edbe083e54127ddcdabda762fb2827cfa9899aa736ed1977d61fab26b6e5d6",
+  "strict_event_count": 18,
+  "models": [
+    "C00:IMRPhenomXPHM-SpinTaylor",
+    "C00:IMRPhenomXPNR"
+  ],
+  "primary_parameters": [
+    "chirp_mass",
+    "mass_ratio",
+    "chi_eff",
+    "luminosity_distance"
+  ],
+  "screening_parameters": [
+    "chirp_mass_source",
+    "chi_eff",
+    "luminosity_distance"
+  ],
+  "definitions": {
+    "normalized_wasserstein_1": "W1 divided by the mean of the two 90% interval widths",
+    "js_divergence_bits": "Base-2 JSD from 60 equal-width bins over pooled range",
+    "standardized_median_displacement": "Absolute median difference divided by sqrt(var_XPHM + var_XPNR)",
+    "interval_overlap_90": "Intersection length divided by union length",
+    "log_width_ratio": "log(width_XPHM / width_XPNR)",
+    "noise_threshold": "Larger model-specific 95th percentile from 100 random half-split normalized-W1 replicates"
+  },
+  "seeds": {
+    "split_noise": 20260802,
+    "permutation_root": 20260803
+  },
+  "counts": {
+    "full_posterior_metric_rows": 90,
+    "split_noise_rows": 18000,
+    "event_endpoint_rows": 18
+  },
+  "hypotheses": [
+    {
+      "hypothesis": "H1",
+      "family": "primary",
+      "test": "One-sided Spearman permutation test",
+      "alternative": "rho > 0",
+      "effect_statistic": 0.14551083591331268,
+      "raw_p_value": 0.2833871661283387,
+      "adjusted_p_value": 0.2833871661283387,
+      "alpha": 0.05,
+      "reject": false,
+      "permutations": 100000
+    },
+    {
+      "hypothesis": "H2",
+      "family": "secondary_Holm",
+      "test": "One-sided Spearman permutation test",
+      "alternative": "rho > 0",
+      "effect_statistic": 0.9711042311661506,
+      "raw_p_value": 9.99990000099999e-06,
+      "adjusted_p_value": 9.99990000099999e-06,
+      "alpha": 0.05,
+      "reject": true,
+      "permutations": 100000
+    },
+    {
+      "hypothesis": "H3",
+      "family": "secondary_Holm",
+      "test": "One-sided Wilcoxon signed-rank test",
+      "alternative": "chi_eff NW1 > luminosity_distance NW1",
+      "effect_statistic": 171.0,
+      "raw_p_value": 3.814697265625e-06,
+      "adjusted_p_value": 7.62939453125e-06,
+      "alpha": 0.05,
+      "reject": true,
+      "permutations": 0
+    }
+  ],
+  "figures": [
+    "figure_H1_snr_vs_event_median_NW1.png",
+    "figure_H2_screening_validation.png",
+    "figure_H3_chi_eff_vs_distance_NW1.png",
+    "figure_primary_NW1_matrix.png"
+  ],
+  "input_files": [
+    {
+      "path": "/mnt/data/GWTC5_test/data/processed/confirmatory_batch_A/confirmatory_batch_A_posteriors.hdf5",
+      "filename": "confirmatory_batch_A_posteriors.hdf5",
+      "size_bytes": 55101321,
+      "sha256": "10bd0928915b53a65706c476fd9d19cb07f0cd3cede40e48e2f9d1751b5ce361",
+      "event_count": 6,
+      "events": "GW240414_054515;GW240525_031210;GW240531_075248;GW240629_145256;GW240922_142106;GW241101_220523"
+    },
+    {
+      "path": "/mnt/data/GWTC5_test/data/processed/confirmatory_batch_A_replacement_01/confirmatory_batch_A_replacement_01_posteriors.hdf5",
+      "filename": "confirmatory_batch_A_replacement_01_posteriors.hdf5",
+      "size_bytes": 5186303,
+      "sha256": "0d045b32e4a0ff0412fe24064b7db3b949ce3135747c2a0181df21b1e385699d",
+      "event_count": 1,
+      "events": "GW241109_115924"
+    },
+    {
+      "path": "/mnt/data/GWTC5_test/data/processed/confirmatory_batch_B/confirmatory_batch_B_posteriors.hdf5",
+      "filename": "confirmatory_batch_B_posteriors.hdf5",
+      "size_bytes": 51405910,
+      "sha256": "17e67e3893e20404130ded2953158659b17eddd95067fd63c41c201ac5cbba7a",
+      "event_count": 6,
+      "events": "GW240413_022019;GW240426_031451;GW240428_225440;GW240627_131622;GW241109_033317;GW250109_010541"
+    },
+    {
+      "path": "/mnt/data/GWTC5_test/data/processed/confirmatory_batch_B_replacements_01/confirmatory_batch_B_replacements_01_posteriors.hdf5",
+      "filename": "confirmatory_batch_B_replacements_01_posteriors.hdf5",
+      "size_bytes": 15067201,
+      "sha256": "c60fd552384d0ad93390b7f8650b9c96e81eaa65eb101f56e4d94d5c8d1b8857",
+      "event_count": 2,
+      "events": "GW240630_101703;GW240910_103535"
+    },
+    {
+      "path": "/mnt/data/GWTC5_test/data/processed/confirmatory_batch_C/confirmatory_batch_C_posteriors.hdf5",
+      "filename": "confirmatory_batch_C_posteriors.hdf5",
+      "size_bytes": 56270601,
+      "sha256": "eee2f0fbdc7c54afd9af45b41ebac93ebd660cbc43dcc2e6d2ac65c07d1c4c7a",
+      "event_count": 6,
+      "events": "GW240526_093944;GW240825_055146;GW241114_235258;GW241230_084504;GW250101_011205;GW250108_152221"
+    },
+    {
+      "path": "/mnt/data/GWTC5_test/data/processed/confirmatory_batch_C_replacement_01/confirmatory_batch_C_replacement_01_posteriors.hdf5",
+      "filename": "confirmatory_batch_C_replacement_01_posteriors.hdf5",
+      "size_bytes": 11603500,
+      "sha256": "8a7b63265ac761889d345190a3b2f374be110c740f17b246f0b6ade13e367650",
+      "event_count": 1,
+      "events": "GW240519_012815"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+hypothesis,family,test,alternative,effect_statistic,raw_p_value,adjusted_p_value,alpha,reject,permutations
+H1,primary,One-sided Spearman permutation test,rho > 0,0.14551083591331268,0.2833871661283387,0.2833871661283387,0.05,False,100000
+H2,secondary_Holm,One-sided Spearman permutation test,rho > 0,0.9711042311661506,9.99990000099999e-06,9.99990000099999e-06,0.05,True,100000
+H3,secondary_Holm,One-sided Wilcoxon signed-rank test,chi_eff NW1 > luminosity_distance NW1,171.0,3.814697265625e-06,7.62939453125e-06,0.05,True,0

@@ -1,0 +1,19 @@
+GWTC-5 confirmatory analysis
+UTC start: 2026-08-02T17:08:15.829666+00:00
+Project root: /mnt/data/GWTC5_test
+Python: 3.13.5 (main, May  5 2026, 21:05:52) [GCC 14.2.0]
+NumPy: 2.3.5
+pandas: 2.2.3
+h5py: 3.15.1
+Locked events: 18
+Relevant compact posterior files: 6
+Verified posterior arrays: 180
+Full-posterior metric rows: 90
+Computing 100 half-split noise replicates...
+
+CONFIRMATORY ANALYSIS COMPLETE
+Elapsed seconds: 15.089
+H1 rho=0.145511, p=0.283387
+H2 rho=0.971104, raw p=9.9999e-06, Holm p=9.9999e-06
+H3 W=171, raw p=3.8147e-06, Holm p=7.62939e-06
+Outputs: /mnt/data/GWTC5_test/results/confirmatory_analysis

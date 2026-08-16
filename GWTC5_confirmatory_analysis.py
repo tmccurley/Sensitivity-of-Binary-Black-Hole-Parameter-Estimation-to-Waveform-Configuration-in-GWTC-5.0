@@ -760,18 +760,6 @@ def run_analysis(project_root: Path, overwrite: bool = False) -> Path:
         paths.output_dir / "confirmatory_parameter_metrics.csv",
         index=False,
     )
-    # Browser-ready copy used by the repository's waveform comparison page.
-    # A JavaScript assignment works when the page is opened directly from disk,
-    # avoiding a local-server requirement and a manual file-import step.
-    dashboard_records = parameter_metrics.replace(
-        {np.nan: None, np.inf: None, -np.inf: None}
-    ).to_dict(orient="records")
-    (paths.output_dir / "waveform-comparison-data.js").write_text(
-        "window.GWTC5_WAVEFORM_DATA = "
-        + json.dumps(dashboard_records, ensure_ascii=False)
-        + ";\n",
-        encoding="utf-8",
-    )
 
     primary = parameter_metrics[
         parameter_metrics["parameter"].isin(PRIMARY_PARAMETERS)
@@ -836,6 +824,22 @@ def run_analysis(project_root: Path, overwrite: bool = False) -> Path:
     event_endpoints.to_csv(
         paths.output_dir / "confirmatory_event_endpoints.csv",
         index=False,
+    )
+    # Browser-ready data keeps the visualization self-contained even when the
+    # HTML file is opened directly rather than through a web server.
+    dashboard_metrics = parameter_metrics.replace(
+        {np.nan: None, np.inf: None, -np.inf: None}
+    ).to_dict(orient="records")
+    dashboard_events = event_endpoints.replace(
+        {np.nan: None, np.inf: None, -np.inf: None}
+    ).to_dict(orient="records")
+    (paths.output_dir / "waveform-comparison-data.js").write_text(
+        "window.GWTC5_WAVEFORM_DATA = "
+        + json.dumps(dashboard_metrics, ensure_ascii=False)
+        + ";\nwindow.GWTC5_EVENT_DATA = "
+        + json.dumps(dashboard_events, ensure_ascii=False)
+        + ";\n",
+        encoding="utf-8",
     )
 
     # Spawn deterministic child generators so H1 and H2 do not share a
