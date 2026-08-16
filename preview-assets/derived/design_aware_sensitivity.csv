@@ -1,0 +1,5 @@
+analysis,effect,exceedances,iterations,p_value,seed,lower_95,upper_95
+H1 within-screening-stratum permutation,0.14551083591331268,15275.0,100000,0.15275847241527585,20260807.0,,
+H2 within-SNR-stratum permutation,0.9711042311661506,0.0,100000,9.99990000099999e-06,20260808.0,,
+H1 partial Spearman controlling screening score,0.23194398926042026,,0,,,,
+H1 bootstrap Spearman median,0.1401673640167364,,100000,,20260809.0,-0.34164070612668745,0.6118785710894095
