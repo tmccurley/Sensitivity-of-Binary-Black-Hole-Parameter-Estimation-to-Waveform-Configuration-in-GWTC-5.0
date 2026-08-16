@@ -599,7 +599,7 @@ def create_figures(
     ax.set_title("H1: SNR and event-level model sensitivity")
     fig.tight_layout()
     path = output_dir / "figure_H1_snr_vs_event_median_NW1.png"
-    fig.savefig(path, dpi=180)
+    fig.savefig(path, dpi=180, bbox_inches="tight", pad_inches=0.15)
     plt.close(fig)
     figure_files.append(path.name)
 
