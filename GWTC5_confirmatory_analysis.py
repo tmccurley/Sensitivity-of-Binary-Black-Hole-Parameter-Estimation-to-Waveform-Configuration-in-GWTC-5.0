@@ -760,6 +760,18 @@ def run_analysis(project_root: Path, overwrite: bool = False) -> Path:
         paths.output_dir / "confirmatory_parameter_metrics.csv",
         index=False,
     )
+    # Browser-ready copy used by the repository's waveform comparison page.
+    # A JavaScript assignment works when the page is opened directly from disk,
+    # avoiding a local-server requirement and a manual file-import step.
+    dashboard_records = parameter_metrics.replace(
+        {np.nan: None, np.inf: None, -np.inf: None}
+    ).to_dict(orient="records")
+    (paths.output_dir / "waveform-comparison-data.js").write_text(
+        "window.GWTC5_WAVEFORM_DATA = "
+        + json.dumps(dashboard_records, ensure_ascii=False)
+        + ";\n",
+        encoding="utf-8",
+    )
 
     primary = parameter_metrics[
         parameter_metrics["parameter"].isin(PRIMARY_PARAMETERS)
