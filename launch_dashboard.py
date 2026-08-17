@@ -13,6 +13,16 @@ import webbrowser
 from pathlib import Path
 
 
+class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
+    """Serve current visualization code instead of a browser-cached copy."""
+
+    def end_headers(self) -> None:
+        self.send_header("Cache-Control", "no-store, no-cache, must-revalidate")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
+        super().end_headers()
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8765)
@@ -67,7 +77,7 @@ def main() -> None:
     else:
         print(f"Using cached confirmatory results: {dashboard_data}")
 
-    handler = lambda *a, **kw: http.server.SimpleHTTPRequestHandler(  # noqa: E731
+    handler = lambda *a, **kw: NoCacheHandler(  # noqa: E731
         *a, directory=str(root), **kw
     )
     server = http.server.ThreadingHTTPServer(("127.0.0.1", args.port), handler)
