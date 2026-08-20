@@ -13,6 +13,7 @@ INCLUDED_DIRECTORIES = (
     "python-code",
     "website",
     "figures",
+    "preview-assets",
     "results/confirmatory_analysis",
     "waveform-comparison",
 )
@@ -22,6 +23,9 @@ INCLUDED_FILES = (
     "about.html",
     "README.md",
     "Confirmatory_protocol.md",
+    "website/favicon.svg",
+    "website/site-shell.js",
+    "website/styles.css",
 )
 SCRIPT_SUFFIXES = {".py", ".ipynb", ".bat"}
 
@@ -80,6 +84,10 @@ def build_archive(root: Path, output: Path) -> tuple[int, int]:
     bundle_name = f"GWTC5_figures_and_code_only_{date.today().isoformat()}"
     files = collect_files(root)
     scripts = repository_scripts(root)
+    file_hashes = {
+        path.relative_to(root).as_posix(): sha256_bytes(path.read_bytes())
+        for path in files
+    }
     output = output.resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix(output.suffix + ".tmp")
@@ -103,6 +111,13 @@ def build_archive(root: Path, output: Path) -> tuple[int, int]:
 
     with zipfile.ZipFile(temporary) as archive:
         names = set(archive.namelist())
+        for relative, expected_hash in file_hashes.items():
+            archive_name = f"{bundle_name}/{relative}"
+            if archive_name not in names:
+                raise RuntimeError(f"Packaged file is missing from archive: {relative}")
+            actual_hash = sha256_bytes(archive.read(archive_name))
+            if actual_hash != expected_hash:
+                raise RuntimeError(f"Archived file differs from source: {relative}")
         for relative, expected_hash in scripts.items():
             archive_name = f"{bundle_name}/{relative}"
             if archive_name not in names:
@@ -123,7 +138,7 @@ def main() -> None:
     )
     file_count, script_count = build_archive(root, output)
     print(f"Created: {output.resolve()}")
-    print(f"Packaged files: {file_count}")
+    print(f"Packaged and hash-verified files: {file_count}")
     print(f"Verified scripts and notebooks: {script_count}")
 
 

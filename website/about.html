@@ -3,10 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="About Thomas McCurley's GWTC-5.0 waveform-configuration sensitivity study, acknowledgments, methods scope, and AI-use disclosure.">
-  <title>About - GWTC-5.0 waveform sensitivity</title>
-  <style>
-    :root{color-scheme:dark;--ink:#edf4ff;--muted:#a8bad2;--paper:#070b14;--panel:#101827;--line:#2b3a50;--violet:#a78bfa;--cyan:#22d3ee;--coral:#fb7185;--font-sans:Aptos,"Segoe UI Variable","Segoe UI",Helvetica,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-sans)}header{padding:30px clamp(20px,6vw,90px) 24px;background:linear-gradient(125deg,#080d19,#21184b 60%,#103b4a);color:var(--ink)}header>*{max-width:900px;margin-left:auto;margin-right:auto}h1{font:500 clamp(2rem,4vw,3.2rem)/1.05 var(--font-sans);letter-spacing:-.025em;margin:.35rem auto .45rem}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:#67e8f9;font-weight:500}nav{display:flex;gap:18px;margin-top:16px}nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--coral);padding-bottom:3px}main{max-width:900px;margin:auto;padding:30px 20px 60px}.section{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--violet);padding:24px;margin-bottom:14px}.section h2{font:500 1.4rem/1.2 var(--font-sans);letter-spacing:-.015em;margin:0 0 10px}.section p{line-height:1.65;margin:.6rem 0}.section .meta{font-size:.82rem;color:var(--muted)}.contact{border-left-color:var(--cyan)}a{color:#67e8f9}@media(max-width:600px){header{padding-top:26px}.section{padding:20px}}
-  </style>
+  <meta name="description" content="About Thomas McCurley's GWTC-5.0 waveform-configuration sensitivity study, its methods, scope, acknowledgments, and reproducibility materials.">
+  <meta name="theme-color" content="#030407">
+  <title>About and methods - GWTC-5.0 waveform sensitivity</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script src="site-shell.js" defer></script>
 </head>
-<body><header><div class="eyebrow">GWTC-5.0 waveform sensitivity</div><h1>About this project</h1><nav aria-label="Site navigation"><a href="index.html">Explore</a><a href="about.html" aria-current="page">About</a></nav></header><main><section class="section"><h2>Purpose and scope</h2><p>This project examines how inferred binary-black-hole properties change when the same gravitational-wave event is analyzed with two released waveform configurations: IMRPhenomXPHM-SpinTaylor and IMRPhenomXPNR. It visualizes configuration sensitivity; it does not test which waveform is more accurate.</p><p>The study separates 17 method-development events from an 18-event balanced confirmatory sample. A prospectively locked nine-event reserve sample then tests whether the effective-spin-versus-distance ordering repeats. Additional analyses examine robustness, posterior storage diagnostics, and possible joint mass-ratio-spin mechanisms.</p><p class="meta">The balanced score-by-SNR design broadens coverage but does not estimate catalog-wide prevalence.</p></section><section class="section"><h2>Author</h2><p><strong>Thomas McCurley</strong>, Sierra Canyon School, created the analysis and interactive site. The project combines reproducible statistical analysis with a public-facing explanation intended for readers with a range of gravitational-wave backgrounds.</p></section><section class="section"><h2>Acknowledgments</h2><p>Thomas McCurley gratefully acknowledges <strong>Dr. Bo Zhao of the University of Washington</strong> for remote mentorship, research-topic guidance, and advice on presenting the work through a clearer visual website.</p><p>The project uses public GWTC-5.0 products from the LIGO Scientific Collaboration, Virgo Collaboration, and KAGRA Collaboration, distributed through the Gravitational Wave Open Science Center. The detector, computing, data-quality, catalog, and parameter-estimation teams made this analysis possible.</p></section><section class="section"><h2>AI use disclosure</h2><p>ChatGPT (OpenAI) assisted with coding, structural critique, language-level feedback, and website development. Claude (Anthropic) reviewed code and helped correct errors. These tools were used as research resources under the author's direction.</p><p>Thomas McCurley independently verified the scientific claims, sources, analysis choices, and final website content and remains responsible for the interpretation presented here.</p></section><section class="section contact"><h2>Questions and contact</h2><p>Questions, corrections, and constructive feedback are welcome. Contact Thomas McCurley at <a href="mailto:tcmc921@gmail.com">tcmc921@gmail.com</a>.</p></section></main></body></html>
+<body>
+  <a class="skip-link" href="#mainContent">Skip to the project information</a>
+  <header class="site-header about-header">
+    <div class="header-inner">
+      <div class="eyebrow">GWTC-5.0 · research record</div>
+      <h1>About the study</h1>
+      <p>Purpose, design, provenance, limitations, authorship, and materials for reproducing the waveform-configuration sensitivity analysis.</p>
+      <nav class="site-nav" aria-label="Site navigation"><a href="index.html">Explore</a><a href="about.html" aria-current="page">About &amp; methods</a></nav>
+    </div>
+    <div class="horizon-visual" aria-hidden="true"><span class="accretion-disk"></span><span class="horizon-core"></span></div>
+  </header>
+
+  <main id="mainContent" class="about-main" tabindex="-1">
+    <section class="about-card about-lead" aria-labelledby="purposeTitle">
+      <h2 id="purposeTitle">Purpose and scope</h2>
+      <p>This project examines how inferred binary-black-hole properties change when the same gravitational-wave event is analyzed with two released waveform configurations: IMRPhenomXPHM-SpinTaylor and IMRPhenomXPNR. It visualizes <strong>configuration sensitivity</strong>; it does not determine which waveform is more accurate.</p>
+      <p>The scientific question remains open. The true source parameters are unknown, posterior intervals are conditional on each released analysis configuration, and the selected events do not represent a population-prevalence estimate. Conclusions are therefore limited to the compared C00 configurations and the study samples.</p>
+    </section>
+
+    <section class="about-card" aria-labelledby="designTitle">
+      <h2 id="designTitle">Study design and statistical status</h2>
+      <dl class="method-list">
+        <dt>Development</dt><dd>Seventeen method-development events were used before confirmation and are separate from the events displayed as confirmatory or replication evidence.</dd>
+        <dt>Confirmation</dt><dd>Eighteen events were balanced across a 3 × 3 screening-score/SNR design, with two events per cell. The event—not an individual posterior draw—is the unit of inference.</dd>
+        <dt>Hypotheses</dt><dd>H1 was the sole primary hypothesis. H2 and H3 formed a Holm-adjusted secondary family; all three prespecified results are reported on the Explore page.</dd>
+        <dt>Replication</dt><dd>Nine previously unprocessed reserve events, one per design cell, tested one prospectively locked H3 hypothesis after selection was frozen.</dd>
+        <dt>Numerical audit</dt><dd>The confirmatory run records metric definitions, input SHA-256 hashes, fixed seeds, sample audits, and 100,000-permutation settings in a machine-readable manifest.</dd>
+      </dl>
+      <p class="meta">Exploratory mechanism analyses and post-confirmatory robustness checks are labeled separately from the prespecified tests throughout the visualization.</p>
+    </section>
+
+    <div class="about-grid">
+      <section class="about-card" aria-labelledby="authorTitle">
+        <h2 id="authorTitle">Author</h2>
+        <p><strong>Thomas McCurley</strong>, Sierra Canyon School, created the analysis and interactive site. The project combines reproducible statistical analysis with a public-facing explanation intended for readers with a range of gravitational-wave backgrounds.</p>
+      </section>
+
+      <section class="about-card" aria-labelledby="ackTitle">
+        <h2 id="ackTitle">Acknowledgments</h2>
+        <p>Thomas McCurley gratefully acknowledges <strong>Dr. Bo Zhao of the University of Washington</strong> for remote mentorship, research-topic guidance, and advice on presenting the work through a clearer visual website.</p>
+        <p>The project uses public GWTC-5.0 products from the LIGO Scientific Collaboration, Virgo Collaboration, and KAGRA Collaboration, distributed through the Gravitational Wave Open Science Center.</p>
+      </section>
+    </div>
+
+    <section class="about-card contact-card" aria-labelledby="materialsTitle">
+      <h2 id="materialsTitle">Research materials and contact</h2>
+      <p>The frozen protocol and confirmatory artifacts are available alongside the complete verified code and figure archive. Questions, corrections, and constructive feedback are welcome at <a href="mailto:tcmc921@gmail.com">tcmc921@gmail.com</a>.</p>
+      <div class="resource-row"><a href="../Confirmatory_protocol.md">Frozen protocol</a><a href="../results/confirmatory_analysis/confirmatory_analysis_manifest.json">Analysis manifest</a><a href="../results/confirmatory_analysis/confirmatory_hypothesis_results.csv">Hypothesis results</a><a href="../downloads/GWTC5_all_figures_and_code_only.zip">Figures &amp; code archive</a></div>
+      <p class="meta">Confirmatory analysis snapshot: 2 August 2026. Website revision: 20 August 2026.</p>
+    </section>
+  </main>
+</body>
+</html>
